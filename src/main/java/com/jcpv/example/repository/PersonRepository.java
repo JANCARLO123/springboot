@@ -7,12 +7,14 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 import java.util.List;
 
 /**
  * Created by JanCarlo on 21/08/2017.
  */
-@Repository
+
+@Transactional
 public interface PersonRepository extends JpaRepository<Person, Long> {
 
     Person findByName(String name);

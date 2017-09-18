@@ -14,6 +14,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import com.jcpv.example.service.MyUserDetailsService;
+
 /**
  * Created by JanCarlo on 21/08/2017.
  */
@@ -22,7 +24,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     private static final Logger logger = LoggerFactory.getLogger(SecurityConfig.class);
-
+    @Autowired
+    private MyUserDetailsService myUserDetailsService;
 
     protected void config(HttpSecurity http)throws Exception{
 //
@@ -57,7 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
     }
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(MyUserDetailsService).passwordEncoder(passwordEncoder());
+         auth.userDetailsService(myUserDetailsService).passwordEncoder(passwordEncoder());
     }
     @Bean
     public PasswordEncoder passwordEncoder() {

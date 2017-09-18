@@ -1,0 +1,10 @@
+
+${AnsiColor.BRIGHT_BLUE}     ____.        _______  _________       __________.____
+${AnsiColor.BRIGHT_BLUE}    |    |____    \      \ \_   ___ \_____ \______   \    |    ____
+${AnsiColor.BRIGHT_BLUE}    |    \__  \   /   |   \/    \  \/\__  \ |       _/    |   /  _ \
+${AnsiColor.BRIGHT_BLUE}/\__|    |/ __ \_/    |    \     \____/ __ \|    |   \    |__(  <_> )
+${AnsiColor.BRIGHT_BLUE}\________(____  /\____|__  /\______  (____  /____|_  /_______ \____/
+${AnsiColor.BRIGHT_BLUE}              \/         \/        \/     \/       \/        \/
+${AnsiColor.BRIGHT_RED}-------------------------
+${AnsiColor.BRIGHT_RED}.:::Spring boot 1.5.6:::.
+${AnsiColor.BRIGHT_RED}-------------------------

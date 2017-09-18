@@ -5,17 +5,23 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.bind.RelaxedPropertyResolver;
+import org.springframework.context.EnvironmentAware;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.persistenceunit.PersistenceUnitManager;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
@@ -25,17 +31,35 @@ import java.util.Properties;
  * Created by JanCarlo on 21/08/2017.
  */
 @Configuration
+@EntityScan(basePackages = {"com.jcpv.example.entity"})
+@EnableJpaRepositories(basePackages = "com.jcpv.example.repository",
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "transactionManager")
 @EnableTransactionManagement
 @PropertySource("classpath:database.properties")
 public class DBconfig {
 
     private static final Logger logger = LoggerFactory.getLogger(DBconfig.class);
 
+
     @Autowired
     private Environment environment;
 
+    /*
+    * Populate SpringBoot DataSourceProperties object directly from application.yml
+    * based on prefix.Thanks to .yml, Hierachical data is mapped out of the box with matching-name
+    * properties of DataSourceProperties object].
+    */
+    /*
     @Bean
-    public LocalContainerEntityManagerFactoryBean getEntityManagerFactory(){
+    @Primary
+    @ConfigurationProperties(prefix = "datasource.sampleapp")
+    public DataSourceProperties dataSourceProperties(){
+        return new DataSourceProperties();
+    }
+    */
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
         localContainerEntityManagerFactoryBean.setDataSource(getDataSource());
@@ -44,7 +68,17 @@ public class DBconfig {
         localContainerEntityManagerFactoryBean.setJpaProperties(jpaProperties());
         return localContainerEntityManagerFactoryBean;
     }
-
+/*
+    @Bean
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory2() throws NamingException {
+        LocalContainerEntityManagerFactoryBean factoryBean = new LocalContainerEntityManagerFactoryBean();
+        factoryBean.setDataSource(getDataSource());
+        factoryBean.setPackagesToScan(new String[] { "com.jcpv.example.entity" });
+        factoryBean.setJpaVendorAdapter(getJpaVendorAdapter());
+        factoryBean.setJpaProperties(jpaProperties());
+        return factoryBean;
+    }
+*/
     @Bean
     public JpaVendorAdapter getJpaVendorAdapter(){
         JpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
@@ -78,9 +112,9 @@ public class DBconfig {
         return dataSource;
     }
     @Bean
-    public PlatformTransactionManager txManager(){
+    public PlatformTransactionManager transactionManager(){
         JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(
-                getEntityManagerFactory().getObject());
+                entityManagerFactory().getObject());
         return jpaTransactionManager;
     }
 

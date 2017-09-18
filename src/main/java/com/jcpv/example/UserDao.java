@@ -16,6 +16,7 @@ import java.util.List;
 public class UserDao {
     @PersistenceContext
     private EntityManager entityManager;
+
     public UserInfo getActiveUser(String userName) {
         UserInfo activeUser = new UserInfo();
         short enabled = 1;
