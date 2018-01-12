@@ -11,6 +11,7 @@ import java.util.List;
  * Created by JanCarlo on 21/08/2017.
  */
 public class PersonServiceImpl implements PersonService{
+
     @Autowired
     private PersonRepository repository;
 

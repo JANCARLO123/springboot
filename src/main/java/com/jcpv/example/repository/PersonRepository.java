@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * Created by JanCarlo on 21/08/2017.
  */
-
+@Repository
 @Transactional
 public interface PersonRepository extends JpaRepository<Person, Long> {
 

@@ -10,16 +10,16 @@ import javax.persistence.Table;
  * Created by JanCarlo on 21/08/2017.
  */
 @Entity
-@Table(name="PERSONS")
+@Table(name="persons")
 //@org.hibernate.annotations.Cache(region = "personCache", usage = CacheConcurrencyStrategy.READ_ONLY)
 public class Person {
 
     @Id
     @GeneratedValue
-    @Column(name="ID")
+    @Column(name="id")
     private Long Id;
 
-    @Column(name="NAME")
+    @Column(name="name")
     private String name;
 
     public Long getId() {
