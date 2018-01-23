@@ -6,5 +6,5 @@ ${AnsiColor.BRIGHT_BLUE}/\__|    |/ __ \_/    |    \     \____/ __ \|    |   \  
 ${AnsiColor.BRIGHT_BLUE}\________(____  /\____|__  /\______  (____  /____|_  /_______ \____/
 ${AnsiColor.BRIGHT_BLUE}              \/         \/        \/     \/       \/        \/
 ${AnsiColor.BRIGHT_RED}-------------------------
-${AnsiColor.BRIGHT_RED}.:::Spring boot 1.5.6:::.
+${AnsiColor.BRIGHT_RED}.:::Spring boot .::${spring-boot.formatted-version} ::.
 ${AnsiColor.BRIGHT_RED}-------------------------

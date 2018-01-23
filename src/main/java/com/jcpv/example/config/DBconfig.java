@@ -30,11 +30,11 @@ import java.util.Properties;
  * Created by JanCarlo on 21/08/2017.
  */
 @Configuration
-@EntityScan(basePackages = {"com.jcpv.example.entity"})
+/*@EntityScan(basePackages = {"com.jcpv.example.entity"})
 @EnableJpaRepositories(basePackages = "com.jcpv.example.repository",
         entityManagerFactoryRef = "entityManagerFactory",
         transactionManagerRef = "transactionManager")
-@EnableTransactionManagement
+@EnableTransactionManagement*/
 @PropertySource("classpath:database-prod.properties")
 public class DBconfig {
 
